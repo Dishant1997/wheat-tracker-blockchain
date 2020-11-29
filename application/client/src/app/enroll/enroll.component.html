@@ -1,0 +1,60 @@
+<section id="enroll">
+  <div class="col-md-6">
+    <h2>SignUp</h2>
+    <form name="form" (ngSubmit)="f.form.valid && enroll()" #f="ngForm" novalidate>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userid.valid }">
+        <label for="userid">Username</label>
+        <input type="text" class="form-control" name="userid" [(ngModel)]="model.userid" #userid="ngModel" required />
+        <div *ngIf="f.submitted && !userid.valid" class="help-block">Username is required</div>
+      </div>
+
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !cnic.valid }">
+        <label for="cnic">CNIC Number</label>
+        <input id="cnic" type="text" class="form-control" min="1000000000000" max="9999999999999" name="cnic" [(ngModel)]="model.cnic" #cnic="ngModel" required/>
+        <div *ngIf="f.submitted && cnic.invalid && rangeUnderflow" 
+        class="help-block">
+        <div *ngIf="cnic.errors.required" >CNIC is required</div>
+        <!-- <div *ngIf="cnic.errors.minlength">CNIC should be 13 digits long</div> -->
+        <div *ngIf="rangeUnderflow">CNIC should not start with a 0</div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userid.valid }">
+        <label for="userid">City</label>
+        <input type="text" class="form-control" name="city" [(ngModel)]="model.city" #city="ngModel" required />
+        <div *ngIf="f.submitted && !cnic.valid" class="help-block">City is required</div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !usertype.valid }">
+        <label for="usertype">Type</label>
+        <select class="form-control" name="usertype" [(ngModel)]="model.usertype" #usertype="ngModel" required>
+          <option *ngFor="let r of types" [ngValue]="r">{{ r }}</option>
+        </select>
+        <div *ngIf="f.submitted && !usertype.valid" class="help-block">Type is required</div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary enroll-btn">SignUp</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6 how-to">
+      <h4>How to Sign Up for this Wheat supply chain management on Blockchain POC:</h4>
+      <ol>
+        <li>
+          <p>Users can use sign up to register themselves, Admin can manage users</p>
+        </li>
+        <li>
+          <p>When User sign up, enrollment is done to the blockchain at the same time.</p>
+        </li>
+      </ol>
+      <p>Once a user is registered and enrolled, they can log in and will be taken to appropriate console page per their
+        user type.</p>
+  </div>
+</section>
+
