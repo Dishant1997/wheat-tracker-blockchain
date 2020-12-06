@@ -43,8 +43,11 @@
                   </p>
                 </span>
                 <button *ngIf="element.currentOrderState==1 && currentUser.usertype=='producer'" [disabled]='element.currentOrderState==1?false:true' (click)="acceptOrder(element.orderId)" class="example-element-button">
-                  Accept Order
+                  Accept Order for {{element.city}}
                 </button>
+                <span *ngIf="element.currentOrderState==1">
+                <p>Deliver To: {{element.city}}</p>
+                </span>
                 <span *ngIf="element.currentOrderState>=2">
                   <p>
                     Order Received
@@ -81,6 +84,12 @@
                 <button *ngIf="element.currentOrderState==3 && currentUser.usertype=='shipper'" [disabled]='element.currentOrderState==3?false:true' (click)="createShipment(element.orderId)" class="example-element-button">
                   Create Shipment
                 </button>
+                <span *ngIf= "element.currentOrderState==3">
+                  <p>
+                    From: {{element.pcity}}
+                    To: {{element.rcity}}
+                  </p>
+                </span>
                 <span *ngIf="element.currentOrderState==4">
                   <p>
                     Shipment Created
@@ -139,8 +148,11 @@
                   </p>
                 </span>
                 <button *ngIf="element.currentOrderState==8 && currentUser.usertype=='retailer'" [disabled]='element.currentOrderState==8?false:true' (click)="acceptCustomerOrder(element.orderId)" class="example-element-button">
-                  Accept Order
+                  Accept Order for {{element.ccity}}
                 </button>
+                <span *ngIf="element.currentOrderState==8">
+                  <p>Deliver To: {{element.ccity}}</p>
+                  </span>                
                 <span *ngIf="element.currentOrderState>=9">
                   <p>
                     Order Received
@@ -177,6 +189,12 @@
                 <button *ngIf="element.currentOrderState==10 && currentUser.usertype=='shipper'" [disabled]='element.currentOrderState==10?false:true' (click)="createCustomerShipment(element.orderId)" class="example-element-button">
                   Create Shipment
                 </button>
+                <span *ngIf= "element.currentOrderState==10">
+                  <p>
+                    From: {{element.rcity}}
+                    To: {{element.ccity}}
+                  </p>
+                </span>
                 <span *ngIf="element.currentOrderState==11">
                   <p>
                     Shipment Created

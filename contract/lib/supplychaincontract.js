@@ -104,6 +104,7 @@ class SupplychainContract extends Contract {
         order.trackingInfo = '';
         order.currentState = "ORDER_CREATED";
         order.city = userCity;
+        order.rcity = userCity;
 
         // Update ledger
         await ctx.stub.putState(orderId, order.toBuffer());
@@ -166,6 +167,7 @@ class SupplychainContract extends Contract {
         order.currentState = "ORDER_RECEIVED";
         order.currentOrderState = 2;
         order.city = userCity;
+        order.pcity = userCity;
 
         // Update ledger
         await ctx.stub.putState(orderId, order.toBuffer());
@@ -630,6 +632,7 @@ class SupplychainContract extends Contract {
 
     async customerOrder(ctx, orderId) {
         console.info('============= Customer Order Placed ===========');
+        let userCity = await this.getCurrentUserCity(ctx);
 
         if (orderId.length < 1) {
             throw new Error('orderId is required as input')
@@ -657,6 +660,7 @@ class SupplychainContract extends Contract {
         // Track who is invoking this transaction
         order.customerId = userId;
         order.modifiedBy = userId;
+        order.ccity = userCity;
 
         order.currentState = "CUSTOMER_ORDER_CREATED";
         order.currentOrderState = 8;
