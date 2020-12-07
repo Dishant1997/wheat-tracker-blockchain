@@ -15,7 +15,7 @@ export class EnrollComponent{
   types: any[];
 
   constructor (private router: Router,private authService: AuthService) {
-    this.types = ["retailer", "producer", "shipper", "customer", "regulator"];
+    this.types = ["retailer", "producer", "shipper", "customer"];
   }
 
   enroll() {
