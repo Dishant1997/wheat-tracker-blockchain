@@ -263,7 +263,7 @@ supplychainRouter.route('/receive-customer-order/:id').put(function (request, re
 
 // Change status to ORDER_RECEIVED, add name of a shipper to order.
 supplychainRouter.route('/assign-shipper/:id').put(function (request, response) {
-    submitTx(request, 'assignShipper', request.params.id, request.query.shipperid)
+    submitTx(request, 'assignShipper', request.params.id, request.query.shipperid, request.query.address)
         .then((assignShipperResponse) => {
             console.log('Process AssignShipper transaction.');
             let order = Order.fromBuffer(assignShipperResponse);
@@ -279,7 +279,7 @@ supplychainRouter.route('/assign-shipper/:id').put(function (request, response) 
 
 // Change status to ORDER_RECEIVED, add name of a shipper to order.
 supplychainRouter.route('/assign-customer-shipper/:id').put(function (request, response) {
-    submitTx(request, 'assignCustomerShipper', request.params.id, request.query.shipperid)
+    submitTx(request, 'assignCustomerShipper', request.params.id, request.query.shipperid, request.query.address)
         .then((assignShipperResponse) => {
             console.log('Process AssignShipper transaction.');
             let order = Order.fromBuffer(assignShipperResponse);

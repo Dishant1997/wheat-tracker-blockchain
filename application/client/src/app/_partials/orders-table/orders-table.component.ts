@@ -132,7 +132,8 @@ export class OrdersTableComponent implements OnInit ,AfterViewInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.assignShipper(orderid, result['id']);
+        console.log("RESULTTTTTTT",result.shipper['id']);
+        this.assignShipper(orderid, result.shipper['id'], result.city);
       }
     });
   }
@@ -166,14 +167,16 @@ chooseCustomerShipper(orderid) {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      this.assignCustomerShipper(orderid, result['id']);
+      console.log("RESULTTTTTTT",result.shipper['id']);
+      this.assignCustomerShipper(orderid, result['id'], result.city);
     }
   });
 }
   // producer
-  assignShipper(orderid, shipperid) {
+  assignShipper(orderid, shipperid, address) {
     this.api.id = orderid;
     this.api.shipperid = shipperid;
+    this.api.address = address;
     this.api.assignShipper().subscribe(api => {
       this.api.queryOrders();
     }, error => {
@@ -183,9 +186,10 @@ chooseCustomerShipper(orderid) {
   }
 
   // producer
-  assignCustomerShipper(orderid, shipperid) {
+  assignCustomerShipper(orderid, shipperid, address) {
     this.api.id = orderid;
     this.api.shipperid = shipperid;
+    this.api.address = address;
     this.api.assignCustomerShipper().subscribe(api => {
       this.api.queryOrders();
     }, error => {

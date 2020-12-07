@@ -233,7 +233,7 @@ class SupplychainContract extends Contract {
      *
      * Usage:  assignShipper ('Order001', 'UPS')
     */
-    async assignShipper(ctx, orderId, newShipperId) {
+    async assignShipper(ctx, orderId, newShipperId, address) {
         console.info('============= assignShipper ===========');
         let userCity = await this.getCurrentUserCity(ctx);
 
@@ -270,7 +270,7 @@ class SupplychainContract extends Contract {
         order.currentState = "SHIPMENT_ASSIGNED";
         order.currentOrderState = 3;
         order.city = userCity;
-
+        order.rdelivery = address;
 
         // Update ledger
         await ctx.stub.putState(orderId, order.toBuffer());
@@ -288,7 +288,7 @@ class SupplychainContract extends Contract {
      *
      * Usage:  assignShipper ('Order001', 'UPS')
     */
-   async assignCustomerShipper(ctx, orderId, newShipperId) {
+   async assignCustomerShipper(ctx, orderId, newShipperId, address) {
     console.info('============= assignShipper ===========');
     let userCity = await this.getCurrentUserCity(ctx);
 
@@ -325,7 +325,7 @@ class SupplychainContract extends Contract {
     order.currentState = "CUSTOMER_ORDER_SHIPMENT_ASSIGNED";
     order.currentOrderState = 10;
     order.city = userCity;
-
+    order.cdelivery = address;
     // Update ledger
     await ctx.stub.putState(orderId, order.toBuffer());
 
@@ -952,7 +952,7 @@ class SupplychainContract extends Contract {
                 // Convert Timestamp date
                 var d = new Date(0);
                 d.setUTCSeconds(history.value.timestamp.seconds.low);
-                jsonRes.Timestamp = d.toLocaleString("en-US", { timeZone: "America/Chicago" }) + " CST";
+                jsonRes.Timestamp = Date.now() + " PST";
                 // Store Order details
                 try {
                     jsonRes.Value = JSON.parse(history.value.value.toString('utf8'));

@@ -11,6 +11,7 @@ export class ApiService {
   id: String = "";
   pwd: String = "";
   shipperid: String = "";
+  address: String = "";
   body: Object;
   options: Object;
   private OrdersData = new BehaviorSubject([]);
@@ -180,13 +181,13 @@ loginTable(){
   assignShipper() {
     let headers = new HttpHeaders();
     headers = this.createUserAuthorizationHeader(headers);
-    return this.httpClient.put(this.baseUrl + '/api/assign-shipper/' + this.id + '?shipperid=' + this.shipperid, {} ,{headers:headers})
+    return this.httpClient.put(this.baseUrl + '/api/assign-shipper/' + this.id + '?shipperid=' + this.shipperid + '&address=' + this.address, {} ,{headers:headers})
   }
 
   assignCustomerShipper() {
     let headers = new HttpHeaders();
     headers = this.createUserAuthorizationHeader(headers);
-    return this.httpClient.put(this.baseUrl + '/api/assign-customer-shipper/' + this.id + '?shipperid=' + this.shipperid, {} ,{headers:headers})
+    return this.httpClient.put(this.baseUrl + '/api/assign-customer-shipper/' + this.id + '?shipperid=' + this.shipperid + '&address=' + this.address, {} ,{headers:headers})
   }
 
   createShipment() {
