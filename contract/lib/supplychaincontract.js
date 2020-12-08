@@ -950,9 +950,10 @@ class SupplychainContract extends Contract {
                 jsonRes.TxId = history.value.tx_id;
                 jsonRes.IsDelete = history.value.is_delete.toString();
                 // Convert Timestamp date
-                var d = new Date(0);
-                d.setUTCSeconds(history.value.timestamp.seconds.low);
-                jsonRes.Timestamp = Date.now() + " PST";
+                const timeElapsed = Date.now();
+                const today = new Date(timeElapsed);
+                // d.setUTCSeconds(history.value.timestamp.seconds.low);
+                jsonRes.Timestamp = today.toISOString(); + " PST";
                 // Store Order details
                 try {
                     jsonRes.Value = JSON.parse(history.value.value.toString('utf8'));

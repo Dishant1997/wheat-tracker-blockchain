@@ -210,10 +210,7 @@
                     <mat-icon aria-hidden="false" aria-label="check circle icon">check_circle</mat-icon>
                   </p>
                 </span>
-              </div>
-            
-            
-            
+              </div>         
             
             <!-- Customer -->
             <div class="status-stage" [class.status-complete]="element.currentOrderState>=13">
@@ -232,35 +229,8 @@
                   <mat-icon aria-hidden="false" aria-label="check circle icon">check_circle</mat-icon>
                 </p>
               </span>
+            </div>          
             </div>
-            
-            
-            
-            </div>
-            <!-- Customer -->
-            <!-- <div class="status-stage" [ngStyle]="{height: '80px', width: '180px'}" [class.status-complete]="element.currentOrderState>=13">
-              <span *ngIf="element.currentOrderState<=12">
-                <p>
-                  Awaiting Shipment...
-                  <mat-icon aria-hidden="false" aria-label="check circle icon">hourglass_empty</mat-icon>
-                </p>
-              </span>
-              <button *ngIf="element.currentOrderState==12 && currentUser.usertype=='customer'" [disabled]='element.currentOrderState==12?false:true' (click)="receiveCustomerShipment(element.orderId)" class="example-element-button">
-                Receive Shipment
-              </button>
-              <span *ngIf="element.currentOrderState>=13">
-                <p>
-                  Shipment Received
-                  <mat-icon aria-hidden="false" aria-label="check circle icon">check_circle</mat-icon>
-                </p>
-              </span>
-            </div> -->
-            <!-- Delete Order -->
-            <!-- <div *ngIf="element.currentOrderState==1 || element.currentOrderState>=13" class="row delete-order">
-              <button (click)="deleteOrder(element)" class="delete-button">
-                Delete Order <mat-icon aria-hidden="false" aria-label="delete icon">delete</mat-icon>
-              </button>
-            </div> -->
           </div>
 
           <!-- Regulator View -->
