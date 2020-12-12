@@ -105,6 +105,7 @@ class SupplychainContract extends Contract {
         order.currentState = "ORDER_CREATED";
         order.city = userCity;
         order.rcity = userCity;
+        order.retailerToAddress = order_details.retailerToAddress;
 
         // Update ledger
         await ctx.stub.putState(orderId, order.toBuffer());
@@ -630,7 +631,7 @@ class SupplychainContract extends Contract {
     return order.toBuffer();
 }
 
-    async customerOrder(ctx, orderId) {
+    async customerOrder(ctx, orderId, address) {
         console.info('============= Customer Order Placed ===========');
         let userCity = await this.getCurrentUserCity(ctx);
 
@@ -661,6 +662,7 @@ class SupplychainContract extends Contract {
         order.customerId = userId;
         order.modifiedBy = userId;
         order.ccity = userCity;
+        order.customerToAddress = address;
 
         order.currentState = "CUSTOMER_ORDER_CREATED";
         order.currentOrderState = 8;

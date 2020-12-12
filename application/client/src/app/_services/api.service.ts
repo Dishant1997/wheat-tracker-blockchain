@@ -12,6 +12,7 @@ export class ApiService {
   pwd: String = "";
   shipperid: String = "";
   address: String = "";
+  customerToAddress: String = "";
   body: Object;
   options: Object;
   private OrdersData = new BehaviorSubject([]);
@@ -229,7 +230,7 @@ receiveCustomerShipment() {
 createCustomerOrder() {
   let headers = new HttpHeaders();
   headers = this.createUserAuthorizationHeader(headers);
-  return this.httpClient.put(this.baseUrl + '/api/customer-orders/' + this.id, {},{headers:headers})
+  return this.httpClient.put(this.baseUrl + '/api/customer-orders/' + this.id + '?customerToAddress=' + this.customerToAddress, {},{headers:headers})
 }
 
 }

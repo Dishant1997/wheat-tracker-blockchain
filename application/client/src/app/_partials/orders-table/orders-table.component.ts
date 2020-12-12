@@ -19,6 +19,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 
 export class OrdersTableComponent implements OnInit ,AfterViewInit{
+  model: any = {};
   orders: MatTableDataSource<Order[]>;
   currentUser: any;
   columnsToDisplay = ['orderId', 'productId', 'price', 'quantity', 'producerId', 'retailerId', 'currentState', 'trackingInfo'];
@@ -167,8 +168,7 @@ chooseCustomerShipper(orderid) {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      console.log("RESULTTTTTTT",result.shipper['id']);
-      this.assignCustomerShipper(orderid, result['id'], result.city);
+      this.assignCustomerShipper(orderid, result.shipper['id'], result.city);
     }
   });
 }
@@ -261,8 +261,10 @@ chooseCustomerShipper(orderid) {
     })
   }
 
-  createCustomerOrder(orderid) {
+  createCustomerOrder(orderid, address) {
     this.api.id = orderid;
+    this.api.customerToAddress = address;
+    console.log("ADDRESS", address);
     this.api.createCustomerOrder().subscribe(api => {
       this.api.queryOrders();
     }, error => {

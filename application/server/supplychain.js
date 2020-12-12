@@ -181,7 +181,8 @@ supplychainRouter.route('/orders').post(function (request, response) {
 });
 
 supplychainRouter.route('/customer-orders/:id').put(function (request, response) {
-    submitTx(request, 'customerOrder', request.params.id)
+    console.log("Addresss cche aaa ", request.query.customerToAddress);
+    submitTx(request, 'customerOrder', request.params.id, request.query.customerToAddress)
         .then((customerOrderResponse) => {
             // process response
             console.log('Process customerOrder transaction.');

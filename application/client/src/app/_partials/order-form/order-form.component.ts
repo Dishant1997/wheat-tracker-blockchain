@@ -36,6 +36,7 @@ export class OrderFormComponent implements OnInit {
       productid: ['', Validators.required],
       price: ['', Validators.required],
       quantity: ['', Validators.required],
+      userAddress: ['', Validators.required],
       producerid: ['', Validators.required]
     });
   }
@@ -52,6 +53,7 @@ export class OrderFormComponent implements OnInit {
       productId: this.messageForm.controls.productid.value,
       price: this.messageForm.controls.price.value,
       quantity: this.messageForm.controls.quantity.value,
+      retailerToAddress: this.messageForm.controls.userAddress.value,
       producerId: this.messageForm.controls.producerid.value,
       retailerId: this.currentUser.userid
     }

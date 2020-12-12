@@ -13,7 +13,18 @@
           <span *ngIf="column=='action'">
               <!-- <span *ngIf="trackingInfo == ''")> -->
             <!-- <mat-icon aria-hidden="false" aria-label="delete icon" (click)="deleteOrder(element.orderId)">delete</mat-icon> -->
-            <button *ngIf="element.currentState === 'SHIPMENT_RECEIVED'" (click)="createCustomerOrder(element.orderId)">Order</button>
+            <span *ngIf="element.currentState === 'SHIPMENT_RECEIVED'">
+              <!-- <input type="text" class="form-control" name="address" [(ngModel)]="model.address" #address="ngModel" required />
+              </span>
+            <button *ngIf="element.currentState === 'SHIPMENT_RECEIVED'" (click)="createCustomerOrder(element.orderId, model.address)">Order</button> -->
+            <form name="form" (ngSubmit)="f.form.valid && createCustomerOrder(element.orderId, model.address)" #f="ngForm" novalidate>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !address.valid }">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" name="address" [(ngModel)]="model.address" #address="ngModel" required />
+              </div>
+              <button [disabled]="loading" class="btn btn-primary enroll-btn">order</button>
+            </form>
+            </span>
             <button *ngIf="element.currentOrderState >= 8" (click)="createCustomerOrder(element.orderId)">Ordered</button>
               </span>
           <!-- </span> -->
@@ -43,10 +54,10 @@
                   </p>
                 </span>
                 <button *ngIf="element.currentOrderState==1 && currentUser.usertype=='producer'" [disabled]='element.currentOrderState==1?false:true' (click)="acceptOrder(element.orderId)" class="example-element-button">
-                  Accept Order for {{element.city}}
+                  Accept Order
                 </button>
                 <span *ngIf="element.currentOrderState==1">
-                <p>Deliver To: {{element.city}}</p>
+                <p>Deliver To: {{element.retailerToAddress}}</p>
                 </span>
                 <span *ngIf="element.currentOrderState>=2">
                   <p>
@@ -86,8 +97,8 @@
                 </button>
                 <span *ngIf= "element.currentOrderState==3">
                   <p>
-                    From: {{element.pcity}}
-                    To: {{element.rdelivery}}
+                    From: {{element.rdelivery}}
+                    To: {{element.retailerToAddress}}
                   </p>
                 </span>
                 <span *ngIf="element.currentOrderState==4">
@@ -148,10 +159,10 @@
                   </p>
                 </span>
                 <button *ngIf="element.currentOrderState==8 && currentUser.usertype=='retailer'" [disabled]='element.currentOrderState==8?false:true' (click)="acceptCustomerOrder(element.orderId)" class="example-element-button">
-                  Accept Order for {{element.ccity}}
+                  Accept Order
                 </button>
                 <span *ngIf="element.currentOrderState==8">
-                  <p>Deliver To: {{element.ccity}}</p>
+                  <p>Deliver To: {{element.customerToAddress}}</p>
                   </span>                
                 <span *ngIf="element.currentOrderState>=9">
                   <p>
@@ -191,8 +202,8 @@
                 </button>
                 <span *ngIf= "element.currentOrderState==10">
                   <p>
-                    From: {{element.rcity}}
-                    To: {{element.cdelivery}}
+                    From: {{element.cdelivery}}
+                    To: {{element.customerToAddress}}
                   </p>
                 </span>
                 <span *ngIf="element.currentOrderState==11">

@@ -27,6 +27,14 @@
         </div>
       </label>
 
+      <label style="text-align:left">
+        Address:
+        <input type="text" formControlName="userAddress">
+        <div *ngIf="submitted && messageForm.controls.address.errors" class="error">
+          <div *ngIf="messageForm.controls.address.errors.required">Address is required</div>
+        </div>
+      </label>
+
      <label style="text-align:left">
         Farmer ID:
         <select class="form-control" formControlName="producerid" id="producerid">
@@ -35,6 +43,8 @@
           </option>
         </select> 
      </label>
+
+     
 
       <input type="submit" style="width:100%" value="Create Order" class="form-button">
 
